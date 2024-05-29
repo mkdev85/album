@@ -13,7 +13,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@ablum/*": ["./src/*"]
+      "@album/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
