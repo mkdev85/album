@@ -9,9 +9,12 @@
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx src",
     "lint-fix": "./node_modules/.bin/eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "prettify": "./node_modules/.bin/prettier --write  src",
+    "ts-check": "tsc --noEmit",
     "prepare": "husky"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.40.0",
+    "@tanstack/react-query-devtools": "^5.40.0",
     "axios": "^1.7.2",
     "next": "14.2.3",
     "react": "^18",
