@@ -22,7 +22,7 @@ interface Address {
   geo: Geo;
 }
 
-interface BackendResponse {
+export interface UserBackendResponse {
   id: number;
   name: string;
   username: string;
@@ -41,7 +41,7 @@ export function getGetUsersQuery() {
     if (!response.data) {
       return Promise.reject(response);
     }
-    return response.data as BackendResponse[];
+    return response.data as UserBackendResponse[];
   };
 
   return {
@@ -50,7 +50,7 @@ export function getGetUsersQuery() {
   };
 }
 
-export function useGetUsersQuery(options: ReactQueryOptions<BackendResponse[]> = {}) {
+export function useGetUsersQuery(options: ReactQueryOptions<UserBackendResponse[]> = {}) {
   const { queryKey, queryFn } = getGetUsersQuery();
 
   const query = useQuery({

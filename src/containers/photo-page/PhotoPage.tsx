@@ -24,24 +24,32 @@ export const PhotoPage: React.FC<PhotoPageProps> = props => {
       <Breadcrumbs
         items={[
           { title: 'Home', onClick: gotoHomepage },
-          { title: 'AlumbId', onClick: handleAlumbClick },
+          { title: 'Album', onClick: handleAlumbClick },
+          { title: 'Photo', disabled: true },
         ]}
       />
-      Photo List:
-      {photoData?.map(photo => (
-        <div key={photo.id}>
-          album ID: {photo.albumId}
-          <Image
-            src={photo.url}
-            alt={photo.title}
-            width={250}
-            height={250}
-            priority
-            placeholder="blur"
-            blurDataURL="/images/image-placeholder.png"
-          />
-        </div>
-      ))}
+
+      <div className="flex justify-between items-center">
+        <h1 className="py-4 text-2xl">Photos List</h1>
+        <p className="items-center text-md font-medium text-gray-700">Album Id: {albumId}</p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-rows-2 gap-4">
+        {photoData?.map(photo => (
+          <div key={photo.id} className="relative">
+            <Image
+              src={photo.url}
+              alt={photo.title}
+              fill
+              className="!static"
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+              priority
+              placeholder="blur"
+              blurDataURL="/images/image-placeholder.png"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

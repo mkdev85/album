@@ -1,5 +1,6 @@
 export interface BreadcrumbsItemProps {
   title: string;
+  disabled?: boolean;
   onClick?: () => void;
 }
 

@@ -10,7 +10,9 @@ export const PublicLayout: React.FC<PublicLayoutProps> = props => {
   return (
     <div>
       <Header />
-      <div className="p-4">{children}</div>
+      <div className="max-w-screen-xl mx-auto">
+        <div className="p-4">{children}</div>
+      </div>
     </div>
   );
 };

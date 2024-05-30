@@ -14,14 +14,28 @@ export const AlbumPage: React.FC<AlbumPageProps> = props => {
 
   return (
     <div>
-      <Breadcrumbs items={[{ title: 'Home', onClick: gotoHomepage }]} />
-      Album List:
-      {albumData?.map(album => (
-        <div key={album.id}>
-          userId: {album.userId}
-          <Card id={album.id} name={album.title} onClick={() => gotoPhotos(album.id)} />
-        </div>
-      ))}
+      <Breadcrumbs
+        items={[
+          { title: 'Home', onClick: gotoHomepage },
+          { title: 'Album', disabled: true },
+        ]}
+      />
+
+      <div className="flex justify-between items-center">
+        <h1 className="py-4 text-2xl">Album List</h1>
+        <p className="items-center text-md font-medium text-gray-700">User Id: {userId}</p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+        {albumData?.map(album => (
+          <Card
+            key={album.id}
+            title={album.title}
+            description={`ID: ${album.id}`}
+            onClick={() => gotoPhotos(album.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
