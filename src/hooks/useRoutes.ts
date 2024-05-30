@@ -44,7 +44,7 @@ export const useRoutes = () => {
     ...routes, // Include the predefined routes for easy access
     gotoHomepage: async () => gotoRoute(routes.homepage),
     gotoAlbum: async (userId: number) => gotoRoute(routes.album, { params: { userId } }),
-    gotoPhotos: async (albumId: number) => gotoRoute(routes.photos, { params: { albumId } }),
+    gotoPhotos: async (albumId: number) => gotoRoute(routes.photo, { params: { albumId } }),
   };
 };
 
