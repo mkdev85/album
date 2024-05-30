@@ -1,5 +1,5 @@
 export const routes = {
-  homepage: '/',
-  album: '/album/:userId',
-  photo: '/photo/:albumId',
+  homepage: '/users',
+  albums: '/users/:userId/albums ',
+  photos: ' /users/:userId/albums/:albumId/photos',
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { userIdLSKey } from '@album/constants/localStorageKeys';
 import { useRoutes } from '@album/hooks/useRoutes';
 import { useGetUsersQuery } from '@album/queries/useGetUsersQuery';
 import { UserCard } from '@album/ui-kit/components/UserCard/UserCard';
@@ -9,12 +8,7 @@ import type { HomePageProps } from './HomePage.props';
 
 export const HomePage: React.FC<HomePageProps> = props => {
   const { data: userData } = useGetUsersQuery();
-  const { gotoAlbum } = useRoutes();
-
-  const handleClick = (userId: number) => {
-    gotoAlbum(userId);
-    localStorage.setItem(userIdLSKey, String(userId));
-  };
+  const { gotoAlbums } = useRoutes();
 
   return (
     <div>
@@ -26,7 +20,7 @@ export const HomePage: React.FC<HomePageProps> = props => {
               <UserCard
                 userData={user}
                 onClick={() => {
-                  handleClick(user.id);
+                  gotoAlbums(user.id);
                 }}
               />
             </div>

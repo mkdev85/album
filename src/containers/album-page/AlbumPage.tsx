@@ -32,7 +32,7 @@ export const AlbumPage: React.FC<AlbumPageProps> = props => {
             key={album.id}
             title={album.title}
             description={`ID: ${album.id}`}
-            onClick={() => gotoPhotos(album.id)}
+            onClick={() => gotoPhotos(userId, album.id)}
           />
         ))}
       </div>

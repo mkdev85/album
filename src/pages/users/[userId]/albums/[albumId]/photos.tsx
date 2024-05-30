@@ -10,14 +10,14 @@ import type { PhotoPageProps } from '@album/containers/photo-page/PhotoPage.prop
 import { getGetPhotosQuery } from '@album/queries/useGetPhotosQuery';
 
 const Photo: NextPage<PhotoPageProps> = props => {
-  const { albumId } = props;
+  const { albumId, userId } = props;
 
   return (
     <>
       <Head>
         <title>Photo Album</title>
       </Head>
-      <PhotoPage albumId={albumId} />
+      <PhotoPage albumId={albumId} userId={userId} />
     </>
   );
 };
@@ -25,12 +25,14 @@ const Photo: NextPage<PhotoPageProps> = props => {
 export const getServerSideProps: GetServerSideProps = async context => {
   const queryClient = new QueryClient();
   const albumId = Number(context.query.albumId);
+  const userId = Number(context.query.userId);
   await queryClient.prefetchQuery(getGetPhotosQuery({ albumId }));
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
       albumId,
+      userId,
     },
   };
 };
