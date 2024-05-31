@@ -1,14 +1,15 @@
 import React from 'react';
 
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { useRoutes } from '@album/hooks/useRoutes';
 import { useGetPhotosQuery } from '@album/queries/useGetPhotosQuery';
 import { Breadcrumbs } from '@album/ui-kit/components/Breadcrumbs/Breadcrumbs';
+import { HoverText } from '@album/ui-kit/components/HoverText/HoverText';
 import { Loader } from '@album/ui-kit/components/Loader/Loader';
 
 import type { PhotoPageProps } from './PhotoPage.props';
+import { AlbumImage } from './components/AlbumImage/AlbumImage';
 
 export const PhotoPage: React.FC<PhotoPageProps> = props => {
   const router = useRouter();
@@ -28,7 +29,7 @@ export const PhotoPage: React.FC<PhotoPageProps> = props => {
   }
 
   return (
-    <div>
+    <div className="py-4">
       <Breadcrumbs
         items={[
           { title: 'Home', onClick: gotoHomepage },
@@ -44,16 +45,18 @@ export const PhotoPage: React.FC<PhotoPageProps> = props => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {photoData?.map((photo, index) => (
-          <div key={photo.id} className="relative w-full h-64">
-            <Image
-              src={photo.url}
-              alt={photo.title}
-              fill
-              sizes="(max-width: 1024px) 25vw, 20vw"
-              priority={index < 5}
-              placeholder="blur"
-              blurDataURL="/images/image-placeholder.png"
-            />
+          <div
+            key={photo.id}
+            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow relative"
+          >
+            <AlbumImage src={photo.url} alt={photo.title} priority={index < 5} />
+
+            <div className="p-2">
+              <HoverText
+                className="text-xl font-bold tracking-tight text-gray-900 first-letter:uppercase"
+                text={photo.title}
+              />
+            </div>
           </div>
         ))}
       </div>

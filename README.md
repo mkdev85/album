@@ -20,11 +20,12 @@
      ```
    - The application will run on `http://localhost:3000/`.
 
-## Assumptions
+## My Implementation
 
 - Landing page has not been created.
 - Default route is `/users`.
 - The user list page is server-side rendered, with API calls made on the server. For other pages, such as albums and photos, we use client-side rendering, and the API calls are handled by the client.
+- For images like (https://via.placeholder.com/150/24f355), we sometimes get a timeout error. In such cases, we need to handle the fallback image so that if there is an error with the original image, the fallback image is displayed. And while the image is loading, we display a grey box as a placeholder.
 
 ## Routes
 
