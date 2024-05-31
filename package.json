@@ -13,7 +13,7 @@
     "sync-icons": "node ./bin/sync_icons.js && prettier --write src/ui-kit/iconComponents",
     "generate": "plop",
     "prepare": "husky",
-    "test": "jest"
+    "test": "jest --silent"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.40.0",
