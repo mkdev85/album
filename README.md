@@ -1,40 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Setup
 
-## Getting Started
+1. **Create `.env` file:**
+   - Create a `.env` file in the root directory.
+   - Add the following content:
+     ```
+     NEXT_PUBLIC_API_URL=https://jsonplaceholder.typicode.com
+     ```
 
-First, run the development server:
+2. **Install Dependencies:**
+   - Run the following command:
+     ```
+     npm install
+     ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+3. **Run the Application:**
+   - Start the development server:
+     ```
+     npm run dev
+     ```
+   - The application will run on `http://localhost:3000/`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Assumptions
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Landing page has not been created.
+- Default route is `/users`.
+- The user list page is server-side rendered, with API calls made on the server. For other pages, such as albums and photos, we use client-side rendering, and the API calls are handled by the client.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Routes
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **`/users`**: Displays a list of users.
+- **`/users/:user_id/albums`**: Displays a list of albums for the given user.
+- **`/users/:user_id/albums/:album_id/photos`**: Displays photos of the given album and user.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Major Libraries Used
 
-## Learn More
+- **Next.js 14**: React.js framework.
+- **React Query**: Managing API calls and server state.
+- **Tailwind CSS**: Styling.
+- **Jest/React Testing Library**: Writing test cases for components.
 
-To learn more about Next.js, take a look at the following resources:
+## Maintaining Code Consistency
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **ESLint**: For linting code.
+  - Run:
+    ```
+    npm run lint-fix
+    ```
+- **Prettier**: For code formatting.
+  - Run:
+    ```
+    npm run prettify
+    ```
+- **Plop.js**: Creating files from templates.
+  - Run:
+    ```
+    npm run generate
+    ```
+- **Husky Git Hooks**: Ensure code quality before commits and pushes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ### Pre-commit
 
-## Deploy on Vercel
+  - Commands run before making a commit:
+    ```
+    npm run lint-fix
+    npm run prettify
+    tsc --noEmit
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  ### Pre-push
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - Commands run before pushing:
+    ```
+    npm run test
+    ```
+
+## Custom Scripts
+
+- We have created custom script in `bin/sync-icons` for converting SVG files into React components.
+  - Add new SVG file in `src/ui-kit/icons`.
+  - Run:
+    ```
+    npm run sync-icons
+    ```
+  - Generated components are in `src/ui-kit/iconComponents`.
+
+## Test Cases
+
+- We have write test cases for each components in `src/ui-kit/components`.
+  - Run:
+    ```
+    npm run test
+    ```
