@@ -1,3 +1,3 @@
 export interface AlbumPageProps {
-  userId: number;
+  children?: string;
 }

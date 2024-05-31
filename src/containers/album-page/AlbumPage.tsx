@@ -1,16 +1,29 @@
 import React from 'react';
 
+import { useRouter } from 'next/router';
+
 import { useRoutes } from '@album/hooks/useRoutes';
 import { useGetAlbumsQuery } from '@album/queries/useGetAlbumsQuery';
 import { Breadcrumbs } from '@album/ui-kit/components/Breadcrumbs/Breadcrumbs';
 import { Card } from '@album/ui-kit/components/Card/Card';
+import { Loader } from '@album/ui-kit/components/Loader/Loader';
 
 import type { AlbumPageProps } from './AlbumPage.props';
 
 export const AlbumPage: React.FC<AlbumPageProps> = props => {
-  const { userId } = props;
-  const { data: albumData } = useGetAlbumsQuery({ userId });
+  const router = useRouter();
+  const userId = Number(router.query.userId);
+
+  const { data: albumData, isLoading } = useGetAlbumsQuery({ userId });
   const { gotoHomepage, gotoPhotos } = useRoutes();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div>

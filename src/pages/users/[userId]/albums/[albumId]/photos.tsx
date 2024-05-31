@@ -1,40 +1,26 @@
 import React from 'react';
 
-import { QueryClient, dehydrate } from '@tanstack/react-query';
-
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
-import { PhotoPage } from '@album/containers/photo-page/PhotoPage';
-import type { PhotoPageProps } from '@album/containers/photo-page/PhotoPage.props';
-import { getGetPhotosQuery } from '@album/queries/useGetPhotosQuery';
+const PhotoPage = dynamic(
+  async () => import('@album/containers/photo-page/PhotoPage').then(module => module.PhotoPage),
+  {
+    ssr: false,
+    loading: () => <div>Loading...</div>,
+  },
+);
 
-const Photo: NextPage<PhotoPageProps> = props => {
-  const { albumId, userId } = props;
-
+const Photo: NextPage = props => {
   return (
     <>
       <Head>
         <title>Photo Album</title>
       </Head>
-      <PhotoPage albumId={albumId} userId={userId} />
+      <PhotoPage />
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async context => {
-  const queryClient = new QueryClient();
-  const albumId = Number(context.query.albumId);
-  const userId = Number(context.query.userId);
-  await queryClient.prefetchQuery(getGetPhotosQuery({ albumId }));
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      albumId,
-      userId,
-    },
-  };
 };
 
 export default Photo;
